@@ -5,6 +5,7 @@ import { PiStorefrontFill } from "react-icons/pi";
 import { AdminProduct } from "./admin/adminProduct";
 import { Toaster } from "react-hot-toast";
 import { AddProduct } from "./admin/AddProduct";
+import { EditProduct } from "./admin/editeProduct";
 
 export default function Adminpage() {
 return (
@@ -21,6 +22,7 @@ return (
         <Route path="/products" element={<AdminProduct />} />
         <Route path="/orders" element={<h1>Orders</h1>} />
         <Route path="/addProduct" element={<AddProduct />} />
+        <Route path="/editProduct/:id" element={<EditProduct/>} />
       </Routes>
     </div>
   </div>

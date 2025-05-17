@@ -1,25 +1,38 @@
-import { useState } from "react";
+
+import { file,setFile } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import uploadMedia from "../utils/mediaUpload";
 
 export default function Testing() {
-    const [number,setNumber] =useState(0);
+  
+  function handleUpload() {
+    uploadMedia(file).then(
+        (url) => {
+            console.log(url);
+            toast.success("File uploaded successfully");
+        
+  }).catch((err) => {
+        console.error(err);
+        toast.error("Error uploading file");
+      })
+}
 
-    function increment() {
-        let newNumber = number + 1;
-        setNumber(newNumber + 1);
-    }
-    function decrement() {
-        let newNumber = number - 1;
-    setNumber(newNumber - 1);
-    }
-    return (
-        <div className="flex flex-col items-center justify-center h-screen bg-gray-100 p-[10px] ">
-            <span className="text-2xl font-bold text-gray-800 mb-4 p-[10px]">
-            {number}
-            </span>
-            <div className="bg-white shadow-md rounded-lg p-6 max-w-sm w-full">
-                <button onClick={increment} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Increment</button>
-                <button onClick={decrement} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Decrement</button>
-            </div>
-        </div>
-    );
+  return (
+    <div className="w-full h-screen flex flex-col justify-center items-center">
+      <input
+        type="file"
+        onChange={(e) => {
+          setFile(e.target.files[0]);
+        }}
+      />
+      <button
+        onClick={handleUpload}
+        className="bg-gray-700 text-white p-2 rounded-lg mt-2"
+      >
+        Upload
+      </button>
+      <ToastContainer />
+    </div>
+  );
 }
